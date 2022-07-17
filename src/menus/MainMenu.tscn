@@ -1,9 +1,18 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/fonts/title_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/img/dice_menu.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/button_font.tres" type="DynamicFont" id=3]
 [ext_resource path="res://src/menus/MainMenu.gd" type="Script" id=4]
+[ext_resource path="res://src/entities/menu_player/MenuPlayer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/menus/MenuTileMap.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/img/ui/red_button01.png" type="Texture" id=7]
+[ext_resource path="res://assets/img/ui/red_button13.png" type="Texture" id=8]
+[ext_resource path="res://assets/img/ui/green_button03.png" type="Texture" id=9]
+[ext_resource path="res://assets/img/ui/green_button02.png" type="Texture" id=10]
+[ext_resource path="res://assets/img/ui/green_button04.png" type="Texture" id=11]
+[ext_resource path="res://assets/img/ui/red_button00.png" type="Texture" id=12]
+[ext_resource path="res://assets/audio/confirmation_001.ogg" type="AudioStream" id=13]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://assets/fonts/pixelated.ttf"
@@ -18,6 +27,11 @@ margin_top = 174.0
 margin_right = 967.0
 margin_bottom = 608.0
 script = ExtResource( 4 )
+
+[node name="Tilemap1" parent="." instance=ExtResource( 6 )]
+
+[node name="MenuPlayer" parent="." instance=ExtResource( 5 )]
+position = Vector2( -33, 256 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_right = 905.0
@@ -48,23 +62,39 @@ size_flags_vertical = 3
 custom_constants/separation = 10
 alignment = 1
 
-[node name="PlayBtn" type="Button" parent="HBoxContainer/VBoxContainer/MenuOptions"]
-margin_top = 32.0
+[node name="PlayBtn" type="TextureButton" parent="HBoxContainer/VBoxContainer/MenuOptions"]
+margin_top = 37.0
 margin_right = 401.0
 margin_bottom = 86.0
+texture_normal = ExtResource( 10 )
+texture_pressed = ExtResource( 9 )
+texture_hover = ExtResource( 11 )
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/MenuOptions/PlayBtn"]
+margin_left = 45.0
+margin_top = -5.0
+margin_right = 125.0
+margin_bottom = 43.0
 custom_fonts/font = ExtResource( 3 )
 text = "Play"
-flat = true
-align = 0
+align = 1
 
-[node name="QuitBtn" type="Button" parent="HBoxContainer/VBoxContainer/MenuOptions"]
+[node name="QuitBtn" type="TextureButton" parent="HBoxContainer/VBoxContainer/MenuOptions"]
 margin_top = 96.0
 margin_right = 401.0
-margin_bottom = 150.0
+margin_bottom = 145.0
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 12 )
+texture_hover = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/MenuOptions/QuitBtn"]
+margin_left = 42.0
+margin_top = -4.0
+margin_right = 122.0
+margin_bottom = 44.0
 custom_fonts/font = ExtResource( 3 )
 text = "Exit"
-flat = true
-align = 0
+align = 1
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
 margin_top = 407.0
@@ -97,6 +127,9 @@ margin_right = 106.0
 margin_bottom = 106.0
 size_flags_stretch_ratio = 2.0
 texture = ExtResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
 
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/MenuOptions/PlayBtn" to="." method="_on_PlayBtn_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/MenuOptions/QuitBtn" to="." method="_on_QuitBtn_pressed"]

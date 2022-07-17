@@ -8,59 +8,68 @@ export var speed = 3
 var dir = ""
 var last_value = 1
 var tile_size = 64
-var inputs = {"ui_right": Vector2.RIGHT,
-			"ui_left": Vector2.LEFT,
-			"ui_up": Vector2.UP,
+var play_pos = Vector2(0,0)
+var exit_pos = Vector2(0,0)
+var on_play = true
+var on_exit = false
+var on_nothing = false
+var inputs = {"ui_up": Vector2.UP,
 			"ui_down": Vector2.DOWN}
 var sides = {
 	"1": {
 		"ui_down": "3",
 		"ui_up": "4",
-		"ui_right": "5",
-		"ui_left": "2",
 	},
 	"2": {
 		"ui_down": "3",
 		"ui_up": "4",
-		"ui_right": "1",
-		"ui_left": "6",
 	},
 	"3": {
 		"ui_down": "6",
 		"ui_up": "1",
-		"ui_right": "5",
-		"ui_left": "2",
 	},
 	"4": {
 		"ui_down": "1",
 		"ui_up": "6",
-		"ui_right": "5",
-		"ui_left": "2",
 	},
 	"5": {
 		"ui_down": "3",
 		"ui_up": "4",
-		"ui_right": "6",
-		"ui_left": "1",
 	},
 	"6": {
 		"ui_down": "4",
 		"ui_up": "3",
-		"ui_right": "2",
-		"ui_left": "5",
 	}
 }
-	
+
 func _ready():
-	position = position.snapped(Vector2.ONE * tile_size)
-	position += Vector2.ONE * tile_size/2
+	play_pos = global_transform.origin.y
+	exit_pos = global_transform.origin.y + tile_size
 	
 func _process(delta):
+	check_light_menu()
 	if tween.is_active():
 		return
 	for dir_key in inputs.keys():
 		if Input.is_action_pressed(dir_key):
 			move(dir_key)
+			
+func check_light_menu():
+	if global_transform.origin.y == play_pos and !on_play:
+		on_play = true
+		on_exit = false
+		on_nothing = false
+		Signals.emit_signal("light_menu", "PlayBtn")
+	elif global_transform.origin.y == exit_pos and !on_exit:
+		on_play = false
+		on_exit = true
+		on_nothing = false
+		Signals.emit_signal("light_menu", "QuitBtn")
+	elif global_transform.origin.y != play_pos and global_transform.origin.y != exit_pos and !on_nothing:
+		on_play = false
+		on_exit = false
+		on_nothing = true
+		Signals.emit_signal("light_menu", null)
 			
 func move(next_dir):
 	ray.cast_to = inputs[next_dir] * tile_size

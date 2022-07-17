@@ -12,6 +12,7 @@ func _ready():
 func _player_moved(current_received, next_sides_received):
 	var player_inside = area.get_overlapping_areas().size() > 0
 	if current_received == win_side and player_inside:
-		label.text = 'NICE'
+		$AudioStreamPlayer.play()
+		label.visible = false
 		can_win = true
 		Signals.emit_signal("check_win")
