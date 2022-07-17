@@ -4,7 +4,7 @@ onready var up = $Up
 onready var down = $Down
 onready var left = $Left
 onready var right = $Right
-onready var current = $Current
+#onready var current = $Current
 
 var next_sides = {
 	"ui_down": "3",
@@ -14,17 +14,17 @@ var next_sides = {
 }
 var current_side = "1"
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	Signals.connect("player_move", self, "_player_moved")
+	Signals.connect("player_moved", self, "_player_moved")
+	Signals.connect("player_moving", self, "_player_moving")
 	set_sides()
 	
 func set_sides():
-	current.set_frame(int(current_side)-1)
-	up.set_frame(int(next_sides["ui_down"])-1)
-	down.set_frame(int(next_sides["ui_up"])-1)
-	left.set_frame(int(next_sides["ui_right"])-1)
-	right.set_frame(int(next_sides["ui_left"])-1)
+	#current.set_frame(int(current_side)-1)
+	up.set_frame(int(next_sides["ui_up"])-1)
+	down.set_frame(int(next_sides["ui_down"])-1)
+	left.set_frame(int(next_sides["ui_left"])-1)
+	right.set_frame(int(next_sides["ui_right"])-1)
 
 func _player_moved(current_received, next_sides_received):
 	next_sides = next_sides_received

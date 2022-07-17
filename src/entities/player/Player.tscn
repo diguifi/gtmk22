@@ -31,3 +31,5 @@ drag_margin_left = 0.5
 drag_margin_top = 0.5
 drag_margin_right = 0.5
 drag_margin_bottom = 0.5
+
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]

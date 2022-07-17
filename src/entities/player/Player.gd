@@ -5,6 +5,7 @@ onready var ray = $RayCast2D
 
 export var speed = 3
 
+var dir = ""
 var tile_size = 64
 var inputs = {"ui_right": Vector2.RIGHT,
 			"ui_left": Vector2.LEFT,
@@ -56,24 +57,29 @@ func _ready():
 func _process(delta):
 	if tween.is_active():
 		return
-	for dir in inputs.keys():
-		if Input.is_action_pressed(dir):
-			move(dir)
+	for dir_key in inputs.keys():
+		if Input.is_action_pressed(dir_key):
+			move(dir_key)
 			
-func move(dir):
-	ray.cast_to = inputs[dir] * tile_size
+func move(next_dir):
+	ray.cast_to = inputs[next_dir] * tile_size
 	ray.force_raycast_update()
 	if !ray.is_colliding():
-		$Sprite.set_frame(get_next_dice_frame(dir))
+		dir = next_dir
+		Signals.emit_signal("player_moving", dir)
 		move_tween(inputs[dir])
 		
-func move_tween(dir):
+func move_tween(dir_input):
 	tween.interpolate_property(self, "position",
-		position, position + dir * tile_size,
+		position, position + dir_input * tile_size,
 		1.0/speed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	tween.start()
 	
-func get_next_dice_frame(dir):
-	var next_side = sides[String($Sprite.frame + 1)][dir]
-	Signals.emit_signal("player_move", next_side, sides[next_side])
+func get_next_dice_frame(dir_move):
+	var next_side = sides[String($Sprite.frame + 1)][dir_move]
+	Signals.emit_signal("player_moved", next_side, sides[next_side])
 	return int(next_side) - 1
+
+
+func _on_Tween_tween_completed(object, key):
+	$Sprite.set_frame(get_next_dice_frame(dir))
