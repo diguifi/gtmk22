@@ -6,6 +6,7 @@ onready var ray = $RayCast2D
 export var speed = 3
 
 var dir = ""
+var last_value = 1
 var tile_size = 64
 var inputs = {"ui_right": Vector2.RIGHT,
 			"ui_left": Vector2.LEFT,
@@ -79,7 +80,6 @@ func get_next_dice_frame(dir_move):
 	var next_side = sides[String($Sprite.frame + 1)][dir_move]
 	Signals.emit_signal("player_moved", next_side, sides[next_side])
 	return int(next_side) - 1
-
 
 func _on_Tween_tween_completed(object, key):
 	$Sprite.set_frame(get_next_dice_frame(dir))

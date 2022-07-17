@@ -22,3 +22,5 @@ func _check_win():
 func go_to_next_level():
 	if next_level:
 		Transition.fade_to(next_level)
+	else:
+		Transition.fade_to("res://src/menus/End.tscn")

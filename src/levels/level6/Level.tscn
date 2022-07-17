@@ -1,14 +1,26 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/entities/player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/levels/level6/TileMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/levels/LevelManager.gd" type="Script" id=3]
 [ext_resource path="res://src/entities/checker/Checker.tscn" type="PackedScene" id=4]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 3 )
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 54.1449, 75.8029 )
+[node name="Tilemap1" parent="." instance=ExtResource( 2 )]
 
 [node name="Checker" parent="." instance=ExtResource( 4 )]
 position = Vector2( 221, 228 )
+win_side = "4"
+
+[node name="Checker2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 283, 94 )
+win_side = "6"
+
+[node name="Checker3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 221, 160 )
+win_side = "6"
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 54.1449, 75.8029 )

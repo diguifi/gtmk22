@@ -11,37 +11,37 @@ margin_bottom = 511.0
 script = ExtResource( 2 )
 
 [node name="Up" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0.501961 )
-position = Vector2( 515, 229 )
+modulate = Color( 1, 1, 1, 0.611765 )
+position = Vector2( 515, 199 )
 scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 1 )
 vframes = 6
 
 [node name="Down" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0.501961 )
-position = Vector2( 515, 285 )
+modulate = Color( 1, 1, 1, 0.611765 )
+position = Vector2( 515, 315 )
 scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 1 )
 vframes = 6
 
 [node name="Left" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0.501961 )
-position = Vector2( 487, 258 )
+modulate = Color( 1, 1, 1, 0.611765 )
+position = Vector2( 457, 258 )
 scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 1 )
 vframes = 6
 
 [node name="Right" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0.501961 )
-position = Vector2( 543, 258 )
+modulate = Color( 1, 1, 1, 0.611765 )
+position = Vector2( 573, 258 )
 scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 1 )
 vframes = 6
 
 [node name="Label" type="Label" parent="."]
-margin_left = 837.0
-margin_top = 54.0
-margin_right = 895.0
-margin_bottom = 68.0
+margin_left = 807.0
+margin_top = 37.0
+margin_right = 865.0
+margin_bottom = 51.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "R: restart"

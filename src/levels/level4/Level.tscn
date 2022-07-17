@@ -11,9 +11,6 @@ next_level = "res://src/levels/level5/Level.tscn"
 
 [node name="Tilemap1" parent="." instance=ExtResource( 2 )]
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 54.1449, 75.8029 )
-
 [node name="Checker" parent="." instance=ExtResource( 4 )]
 position = Vector2( 221, 228 )
 
@@ -24,3 +21,6 @@ win_side = "6"
 [node name="Checker3" parent="." instance=ExtResource( 4 )]
 position = Vector2( 221, 107 )
 win_side = "5"
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 54.1449, 75.8029 )

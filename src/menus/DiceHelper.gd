@@ -9,8 +9,8 @@ onready var right = $Right
 var next_sides = {
 	"ui_down": "3",
 	"ui_up": "4",
-	"ui_right": "5",
-	"ui_left": "2",
+	"ui_right": "2",
+	"ui_left": "5",
 }
 var current_side = "1"
 
